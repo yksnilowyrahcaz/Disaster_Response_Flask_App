@@ -31,7 +31,7 @@ def load_data(database_filepath):
         Y: numpy.ndarray, containing the target categories
         category_names: list, of 35 possible categories
     '''
-    engine = create_engine(f'sqlite:///{database_filepath}')
+    engine = create_engine(f'sqlite:///../data/{database_filepath}')
     df = pd.read_sql_table(f'{database_filepath}', con=engine)
     X = df.message.values
     Y = df.iloc[:, 2:].values
@@ -78,7 +78,7 @@ def build_model():
     '''
     
     pipeline = Pipeline([
-    ('tfidf', TfidfVectorizer(tokenizer=tokenize, max_features=10000, n_gram_range=(1,2))),
+    ('tfidf', TfidfVectorizer(tokenizer=tokenize, max_features=10000, ngram_range=(1,2))),
     ('clf', MultiOutputClassifier(XGBRFClassifier(use_label_encoder=False, verbosity=0, learning_rate=0.1)))
 ])
     return pipeline
@@ -99,7 +99,7 @@ def evaluate_model(model, X_test, Y_test, category_names):
     
     Y_pred = model.predict(X_test)
     print('Model Accuracy: ', (Y_test == Y_pred).mean())
-    print(classification_report(y_test, y_pred, target_names=category_names))
+    print(classification_report(Y_test, Y_pred, target_names=category_names))
 
 def save_model(model, model_filepath):
     '''
@@ -110,7 +110,7 @@ def save_model(model, model_filepath):
         model_filepath: str, the file path where the pickled model will be saved
     '''
     
-    pickle.dump(model, open(f'{model_filepath}.pkl', 'wb'))
+    pickle.dump(model, open(f'{model_filepath}', 'wb'))
 
 def main():
     if len(sys.argv) == 3:
@@ -126,7 +126,7 @@ def main():
         model.fit(X_train, Y_train)
         
         print('Evaluating model...')
-        evaluate_model(X_test, Y_test, category_names)
+        evaluate_model(model, X_test, Y_test, category_names)
 
         print(f'Saving model...\n\tMODEL: {model_filepath}')
         save_model(model, model_filepath)
@@ -137,7 +137,7 @@ def main():
         print('Please provide the filepath of the disaster messages database '\
               'as the first argument and the filepath of the pickle file to '\
               'save the model to as the second argument. \n\nExample: python '\
-              'train_classifier.py ../data/DisasterResponse.db classifier.pkl')
+              'train.py ../data/DisasterResponse.db classifier.pkl')
 
 
 if __name__ == '__main__':
