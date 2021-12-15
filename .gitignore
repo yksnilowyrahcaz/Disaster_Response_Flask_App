@@ -1,5 +1,9 @@
-#Virtual Environment
+# Virtual Environment
 venv/
+
+# IPython Checkpoints
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
 
 # Flask
 instance/*
