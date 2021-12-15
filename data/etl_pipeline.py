@@ -4,26 +4,26 @@ import numpy as np
 import pandas as pd
 from sqlalchemy import create_engine
 
-def ETL(messages_filename, categories_filename, database_filename):
+def ETL(messages_filepath, categories_filepath, database_filepath):
     '''
     Extract, transform and load the messages and categories data into a sqlite database
     
     Parameters
     ----------
-        messages_filename: str
-            name of existing messages dataset file
+        messages_filepath: str
+            file path of existing messages dataset file
             
-        categories_filename: str
-            name of existing categories dataset file
+        categories_filepath: str
+            file path of existing categories dataset file
             
-        database_filename: str
-            desired name of the output sqlite database
+        database_filepath: str
+            desired file path of the output sqlite database
     '''
     
     # load messages and categories data
-    print(f'Loading data from...\n\tMESSAGES: {messages_filename}\n\tCATEGORIES: {categories_filename}')
-    messages = pd.read_csv(messages_filename)
-    categories = pd.read_csv(categories_filename)
+    print(f'Loading data from...\n\tMESSAGES: {messages_filepath}\n\tCATEGORIES: {categories_filepath}')
+    messages = pd.read_csv(messages_filepath)
+    categories = pd.read_csv(categories_filepath)
     
     # remove duplicates
     print('Cleaning data...')
@@ -57,23 +57,24 @@ def ETL(messages_filename, categories_filename, database_filename):
     categories_clean = pd.concat([categories.id, categories_clean], axis=1)
     
     # merge the messages and categories datasets using the common id and drop unused columns
-    df = messages.merge(categories_clean, on=['id']).drop(['id','original'], axis=1)
+    # None of the samples have label `child_alone`, no additional info, thus drop
+    df = messages.merge(categories_clean, on=['id']).drop(['id','original', 'child_alone'], axis=1)
 
     # save the clean dataset into an sqlite database
-    print(f'Saving data to...\n\tDATABASE: {database_filename}')
-    engine = create_engine(f'sqlite:///{database_filename}')
-    df.to_sql(database_filename, engine, index=False, if_exists='replace')
+    print(f'Saving data to...\n\tDATABASE: {database_filepath}')
+    engine = create_engine(f'sqlite:///{database_filepath}')
+    df.to_sql(database_filepath, engine, index=False, if_exists='replace')
 
 def main():
     if len(sys.argv) == 4:
 
-        messages_filename, categories_filename, database_filename = sys.argv[1:]
-        ETL(messages_filename, categories_filename, database_filename)
+        messages_filepath, categories_filepath, database_filepath = sys.argv[1:]
+        ETL(messages_filepath, categories_filepath, database_filepath)
         print('Cleaned data saved to database!')
     
     else:
-        print('Please provide the filenames of the messages and categories datasets as the first and second argument',
-              'respectively, as well as the filename of the database to save the cleaned data to as the third argument.',
+        print('Please provide the filepaths of the messages and categories datasets as the first and second argument',
+              'respectively, as well as the filepaths of the database to save the cleaned data to as the third argument.',
               '\n\nExample: python process_data.py disaster_messages.csv disaster_categories.csv DisasterResponse.db')
 
 if __name__ == '__main__':
