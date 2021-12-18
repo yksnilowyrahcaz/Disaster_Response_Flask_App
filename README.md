@@ -1,7 +1,7 @@
 # Disaster Response Pipeline Project
 
 <img src="images/hurricane-ike-2008 PHOTO BY MARK WILSON GETTY IMAGES.jpg" >
-Photo By Mark Wilson, Getty Images
+Photo: Mark Wilson/Getty Images
 
 ## Table of Contents
 
@@ -45,7 +45,8 @@ Please see `requirements.txt` for a complete list of packages and dependencies u
 Included is a notebook available here to showcase work related to the above questions. Markdown cells are used to walk the reader through the analysis performed. The raw survey response data used in this analysis is openly available on Kaggle available [here](https://www.kaggle.com/c/kaggle-survey-2021/data).
 
 ## Results <a name="results"></a>
-<img src="images/map_acct.jpg" >
+<img src="images/Heavy rain poured down in downtown Yangon (Photo-Nay Won Htet).jpg" >
+Photo: Nay Won Htet
 
 The main findings of this analysis can be found at the post available [here](https://medium.com/@zacharywolinsky/this-new-data-will-make-you-rethink-your-role-in-accounting-finance-8d2f25262440).
 
