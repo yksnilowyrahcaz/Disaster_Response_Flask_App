@@ -21,7 +21,7 @@ Photo: Mark Wilson/Getty Images
     - To run the ML pipeline that trains classifier and saves, type the following in the command line:
         `python models/train_classifier.py data/CategorizedMessages.db models/classifier.pkl`
 4. To run the Flask app, type the following in the command line:
-        `python app/run.py
+        `python app/run.py`
 5. To view the Flask app, open up a browser and go to http://localhost:3001/
 
 ## Supporting Packages <a name="packages"></a>
@@ -62,18 +62,17 @@ This dataset was curated by Appen (formerly Figure Eight). More information abou
 
 ## Methodology <a name="method"></a>
 
-#### ETL
-To prepare the messages and categories data for modeling, each file was loaded into a pandas dataframe and an intial pass was made of removing duplicates. Hidden duplicates were identified within the categories data, in which the same id and message occurred more than once with a different set of category labels. This can be seen by using the `.duplicated(keep=False)` method on the categories dataframe. Upon further investigation it was noted that for each hidden duplicate pair, one had one ore more fewer labels that appeared relevant to the message. Thus, judgement was used to choose the duplicate with the most "1" labels, oeprating on the assumption that false negatives are worse than false positives. After filtering out duplicates using this criterion, the categories data was binarized, merged with the messages based on common id, and saved to a sqlite database.
+### ETL Pipeline
+To prepare the messages and categories data for modeling, each file was loaded into a pandas dataframe and an intial pass was made of removing duplicates. Hidden duplicates were identified within the categories data, in which the same id and message occurred more than once with a different set of category labels. This can be seen by using the `.duplicated(keep=False)` method on the categories dataframe. Upon further investigation it was noted that for each hidden duplicate pair, one had one ore more fewer labels that appeared relevant to the message. Thus, judgement was used to choose the duplicate with the most "1" labels, oeprating on the assumption that false negatives are worse than false positives. After filtering out duplicates using this criterion, the categories data was binarized merged with the messages based on common id. Record id # and original (untranslated) messages were dropped from the dataset since they are not used in modeling. Also, the "child_alone" label was dropped because none of the messages were from this category and it did not provide any additional information. The resulting dataframe was saved to a sqlite database.
 
-#### Machine Learning
-
-
+### Machine Learning Pipeline
+Several algorithms were considered in `ml_pipeline_preparation.ipynb`, including sklearn's support vector classifier, multi-layer perceptron (neural network), random forest, and xgboost's boosted random forest classifier. Ultimately, the `XGBRFClassifier` boosted random forest was chosen because it yielded reasonable precision, recall and f1-scores with significantly faster training time. This is in part because decision trees, which ensemble to form random forests, are greedy algorithms that proceed to divide a feature space based on the previous state rather than a global optimum. For this reason trees are efficient. Alone they easily overfit, but as an ensemble, boosted by weighting subsequently selected training samples relative to their residual from the previous tree, better generalization can be achieved.
 
 ## Results <a name="results"></a>
 <img src="images/Heavy rain poured down in downtown Yangon (Photo-Nay Won Htet).jpg" >
 Photo: Nay Won Htet
 
-The main findings of this analysis can be found at the post available [here](https://medium.com/@zacharywolinsky/this-new-data-will-make-you-rethink-your-role-in-accounting-finance-8d2f25262440).
+
 
 ## Licensing, Authors, Acknowledgements <a name="licensing"></a>
 Many thanks to Kaggle for administering the survey and all respondents for providing responses. You can find the Licensing for the data and other descriptive information at the Kaggle link available [here](https://www.kaggle.com/c/kaggle-survey-2021). Please feel free to use the code and notebook as you like.
