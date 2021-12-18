@@ -5,7 +5,7 @@ Photo-Nay Won Htet
 
 ## Table of Contents
 
-1. [How To Use This Repository] (#howto)
+1. [How To Use This Repository](#howto)
 2. [Project Motivation](#motivation)
 3. [Supporting Packages](#packages)
 4. [File Descriptions](#files)
