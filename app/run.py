@@ -25,7 +25,6 @@ def tokenize(text):
     Returns
         clean_tokens: list, containing normalized, tokenized and lemmatized text
     '''
-    
     # detect and replace urls with placeholder
     url_regex = 'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+'
     detected_urls = re.findall(url_regex, text)
@@ -46,11 +45,11 @@ def tokenize(text):
     return clean_tokens
 
 # load data
-engine = create_engine('sqlite:///../data/MessagesDatabase.db')
-df = pd.read_sql_table('MessagesDatabase.db', engine)
+engine = create_engine('sqlite:///data/CategorizedMessages.db')
+df = pd.read_sql_table('CategorizedMessages', engine)
 
 # load model
-model = joblib.load('../models/classifier.pkl')
+model = joblib.load('models/classifier.pkl')
 
 @app.route('/')
 @app.route('/index')
@@ -58,7 +57,6 @@ def index():
     '''
     index webpage displays cool visuals and receives user input text for model
     '''
-    
     # extract data needed for visuals
     # TODO: Below is an example - modify to extract data for your own visuals
     genre_counts = df.groupby('genre').count()['message']
@@ -114,14 +112,7 @@ def go():
     )
 
 def main():
-#     if len(sys.argv) == 2:
-#         model_filepath = sys.argv[1:]
         app.run(host='0.0.0.0', port=3001, debug=False)
-    
-#     else:
-#         print('Please provide the filepath of the model you would like to '\
-#               'use with this app. \n\nExample: python '\
-#               'run.py ../models/classifier.pkl')
 
 if __name__ == '__main__':
     main()
