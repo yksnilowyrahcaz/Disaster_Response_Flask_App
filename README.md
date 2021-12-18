@@ -28,7 +28,7 @@ Photo: Mark Wilson/Getty Images
 ## Project Motivation <a name="motivation"></a>
 The purpose of this repository is to demonstrate the use of an ETL (extract, transform, load) and machine learning pipeline to develop a language model deployed using a Flask web application.
 
-The theme of the project is centered around the open problem of how to efficiently interpret communications transmitted during a natural disaster to best respond with the appropriate forms of aid. This remains a challenging task because there is typically a large volume of messages that come through social networks and other forms of media and often only a fraction of them directly relate to an immediate need. It is critical that disaster responders know what this need is (food, water, medical aid, electricity) so that the proper aid organizations can be routed to those affected.
+The theme of the project is centered around the open problem of how to efficiently interpret communications transmitted during a natural disaster to best respond with the appropriate forms of aid. This remains a challenge because there is typically a large volume of messages that come through social networks and other forms of media and often only a fraction of them directly relate to a real need. Moreover, some requests for help are more immediate than others. It is critical that disaster responders know what the need is (food, water, medical aid, electricity) so that the proper aid organizations can be routed to those affected.
 
 ## Supporting Packages <a name="packages"></a>
 In addition to the standard python libraries, this notebook and analysis rely on the following packages:
@@ -42,6 +42,20 @@ In addition to the standard python libraries, this notebook and analysis rely on
 Please see `requirements.txt` for a complete list of packages and dependencies utilized in the making of this project
 
 ## File Descriptions <a name="files"></a>
+| File | Description |
+| :--- | :--- |
+| data/messages.csv | fields: id, message, original, genre |
+| data/categories.csv | fields: id, categories (aid_related, water, etc.) |
+| data/etl_pipeline_preparation.ipynb | jupter notebook with code used to develop process_data.py |
+| data/process_data.py | etl script that cleans the data for analysis |
+| data/CategorizedMessages.db | resulting database from running process_data.py | 
+| models/ml_pipeline_preparation.ipynb | jupyter notebook used to develop train_classifier.py |
+| models/train_classifier.py | script with machine learning pipeline |
+| models/classifier.pkl | pickled (byte serialized) version of the model created by train_classifier.py |
+| app/run.py | script that initiates a locally hosted Flask server |
+| app/templates/base.html | jinja template used to render the html |
+| app/templates/go.html | jinja template used to extend base.html |
+
 Included is a notebook available here to showcase work related to the above questions. Markdown cells are used to walk the reader through the analysis performed. The raw survey response data used in this analysis is openly available on Kaggle available [here](https://www.kaggle.com/c/kaggle-survey-2021/data).
 
 ## Results <a name="results"></a>
