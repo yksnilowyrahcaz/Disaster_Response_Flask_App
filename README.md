@@ -62,8 +62,12 @@ This dataset was curated by Appen (formerly Figure Eight). More information abou
 
 ## Methodology <a name="method"></a>
 
-### ETL:
-    To prepare the messages and categories data for modeling, each file was loaded into a pandas dataframe and an intial pass was made of removing duplicates. Hidden duplicates were identified within the categories data, in which the same id and message occurred more than once with a different set of category labels. This can be seen by using the `.duplicated(keep=False)` method on the categories dataframe. Upon further investigation it was noted that for each hidden duplicate pair, one had one ore more fewer labels that appeared relevant to the message. Thus, judgement was used to choose the duplicate with the most "1" labels, oeprating on the assumption that false negatives are worse than false positives. After filtering out duplicates using this criterion.
+#### ETL
+To prepare the messages and categories data for modeling, each file was loaded into a pandas dataframe and an intial pass was made of removing duplicates. Hidden duplicates were identified within the categories data, in which the same id and message occurred more than once with a different set of category labels. This can be seen by using the `.duplicated(keep=False)` method on the categories dataframe. Upon further investigation it was noted that for each hidden duplicate pair, one had one ore more fewer labels that appeared relevant to the message. Thus, judgement was used to choose the duplicate with the most "1" labels, oeprating on the assumption that false negatives are worse than false positives. After filtering out duplicates using this criterion, the categories data was binarized, merged with the messages based on common id, and saved to a sqlite database.
+
+#### Machine Learning
+
+
 
 ## Results <a name="results"></a>
 <img src="images/Heavy rain poured down in downtown Yangon (Photo-Nay Won Htet).jpg" >
