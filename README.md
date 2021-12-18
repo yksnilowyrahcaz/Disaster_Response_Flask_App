@@ -1,46 +1,45 @@
 # Disaster Response Pipeline Project
 
-### Instructions:
-1. Run the following commands in the project's root directory to set up your database and model.
-
-    - To run ETL pipeline that cleans data and stores in database
-        `python data/process_data.py data/disaster_messages.csv data/disaster_categories.csv data/DisasterResponse.db`
-    - To run ML pipeline that trains classifier and saves
-        `python models/train_classifier.py data/DisasterResponse.db models/classifier.pkl`
-
-2. Run the following command in the app's directory to run your web app.
-    `python run.py`
-
-3. Go to http://localhost:3001/
-
-<img src="images/knowledge_wide.jpg" >
-Stuart Kinlough/Getty Images/Ikon Images
+<img src="images/Heavy rain poured down in downtown Yangon (Photo-Nay Won Htet).jpg" >
+Photo-Nay Won Htet
 
 ## Table of Contents
 
-1. [Supporting Packages](#packages)
+1. [How To Use This Repository] (#howto)
 2. [Project Motivation](#motivation)
-3. [File Descriptions](#files)
-4. [Results](#results)
-5. [Licensing, Authors, and Acknowledgements](#licensing)
+3. [Supporting Packages](#packages)
+4. [File Descriptions](#files)
+5. [Results](#results)
+6. [Licensing, Authors, and Acknowledgements](#licensing)
+
+## How To Use This Repository <a name="howto"></a>
+
+1. Download the zip file of this directory
+2. Navigate to this directory on your machine. For the purposes of running the scripts, this will be the root directory.
+3. Open the command line from this root directory and run the following commands to set up your database and model.
+    - To run the ETL pipeline that cleans data and stores in a database, type the following in the command line:
+        `python data/process_data.py data/messages.csv data/categories.csv data/CategorizedMessages.db`
+    - To run the ML pipeline that trains classifier and saves, type the following in the command line:
+        `python models/train_classifier.py data/CategorizedMessages.db models/classifier.pkl`
+    - To run the Flask app, type the following in the command line:
+        `python app/run.py
+4. To view the Flask app, open up a browser and go to http://localhost:3001/
+
+## Project Motivation <a name="motivation"></a>
+The purpose of this repository is to demonstrate the use of an ETL (extract, transform, load) and machine learning pipeline in the deployment of a language model using a Flask web application.
+
+The theme of the project is centered around the open problem of how to efficiently interpret communications transmitted during a natural disaster to best respond with the appropriate forms of aid. This remains a challenging task because there is typically a large volume of messages that come through social networks and other forms of media and often only a fraction of them directly relate to an immediate need. It is critical that disaster responders know what this need is (food, water, medical aid, electricity) so that the proper aid organizations can be routed to those affected.
 
 ## Supporting Packages <a name="packages"></a>
 In addition to the standard python libraries, this notebook and analysis rely on the following packages:
-- geopandas https://geopandas.org/getting_started.html
-- GDAL http://www.lfd.uci.edu/~gohlke/pythonlibs/#gdal
-- Fiona http://www.lfd.uci.edu/~gohlke/pythonlibs/#fiona
-- pyproj http://www.lfd.uci.edu/~gohlke/pythonlibs/#pyproj
-- rtree http://www.lfd.uci.edu/~gohlke/pythonlibs/#rtree
-- shapely http://www.lfd.uci.edu/~gohlke/pythonlibs/#shapely
-- mapclassify https://pysal.org/mapclassify/
-- seaborn https://seaborn.pydata.org/
+- Flask https://flask.palletsprojects.com/en/2.0.x/
+- plotly https://plotly.com/
+- SQLAlchemy https://www.sqlalchemy.org/
+- nltk https://www.nltk.org/
+- sklearn https://scikit-learn.org/stable/
+- xgboost https://xgboost.ai/
 
-## Project Motivation <a name="motivation"></a>
-The purpose of this repository is to provide an example of exploratory data analysis (EDA) in the context of the 2021 Kaggle Machine Learning and Data Science Survey. My goal is to better understand data scientists in the Accounting/Finance industry by exploring the following questions:
-
-1. Which countries had respondents from the Accounting/Finance industry? How do these countries rank in their respective percentage of respondents who work in the Accounting/Finance industry?
-2. What ML and DS roles do accounting and finance professionals work in? What programming languages do they prefer and what algorithms are most popular?
-3. What is the gender profile of all survey respondents? How does the Accounting/Finance industry rank among all other industries in the percentage of Data Scientists who identify as woman, non-binary or another gender descriptor?
+Please see `requirements.txt` for a complete list of packages and dependencies utilized in the making of this project
 
 ## File Descriptions <a name="files"></a>
 Included is a notebook available here to showcase work related to the above questions. Markdown cells are used to walk the reader through the analysis performed. The raw survey response data used in this analysis is openly available on Kaggle available [here](https://www.kaggle.com/c/kaggle-survey-2021/data).
