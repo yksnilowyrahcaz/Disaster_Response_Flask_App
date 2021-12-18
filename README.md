@@ -1,20 +1,18 @@
 # Disaster Response Pipeline Project
-
 <img src="images/hurricane-ike-2008 PHOTO BY MARK WILSON GETTY IMAGES.jpg" >
 Photo: Mark Wilson/Getty Images
 
 ## Table of Contents
-
 1. [How To Use This Repository](#howto)
 2. [Supporting Packages](#packages)
 3. [Project Motivation](#motivation)
-4. [About The Data][(#data)
+4. [About The Dataset](#data)
 5. [File Descriptions](#files)
-6. [Results](#results)
-7. [Licensing, Authors, and Acknowledgements](#licensing)
+6. [Methodology](#method)
+7. [Results](#results)
+8. [Licensing, Authors, and Acknowledgements](#licensing)
 
 ## How To Use This Repository <a name="howto"></a>
-
 1. Download the zip file of this directory
 2. Navigate to this directory on your machine. For the purposes of running the scripts, this will be the root directory.
 3. Open the command line from this root directory and run the following commands to set up your database and model.
@@ -27,7 +25,6 @@ Photo: Mark Wilson/Getty Images
 5. To view the Flask app, open up a browser and go to http://localhost:3001/
 
 ## Supporting Packages <a name="packages"></a>
-
 In addition to the standard python libraries, this notebook and analysis rely on the following packages:
 - Flask https://flask.palletsprojects.com/en/2.0.x/
 - plotly https://plotly.com/
@@ -39,12 +36,14 @@ In addition to the standard python libraries, this notebook and analysis rely on
 Please see `requirements.txt` for a complete list of packages and dependencies utilized in the making of this project
 
 ## Project Motivation <a name="motivation"></a>
-
 The purpose of this repository is to demonstrate the use of an ETL (extract, transform, load) and machine learning pipeline to develop a text classifier deployed using a Flask web application.
 
-The theme of the project is centered around the open problem of how to efficiently and effectively interpret communications transmitted during a natural disaster to best respond with the appropriate forms of aid. This remains a challenge because there is typically a large volume of messages that come through social networks and other forms of media. Often only a fraction of messages directly relate to an identifiable need and some requests for help are more urgent than others. It is critical that disaster responders can identify the need (food, water, medical aid, electricity) so that the proper aid organizations can be routed to those affected.
+The crux of the problem is how to efficiently and effectively interpret communications transmitted during a natural disaster to best respond with the appropriate forms of aid. This remains a challenge because there is typically a large volume of messages that come from social networks and other sources during a natural disaster. Often only a fraction of messages directly relate to a need for assistance and some requests for help are more urgent than others. It is critical that disaster responders can identify the need (food, water, medical aid, electricity) so that the proper aid organizations can be routed to those affected. In sum, the objective is to produce a multi-label classifier that can categorize messages into one or more categories.
 
-In sum, a multi-label classifier is needed to identify messages corresponding to one or more categories. To that end, we have developed an ETL pipeline that cleans 
+## About The Dataset <a name="data"></a>
+The messages.csv and categories.csv data files contain 26,248 records representing messages communicated during actual events including an earthquake in Haiti in 2010, an earthquake in Chile in 2010, floods in Pakistan in 2010, super-storm Sandy in the U.S.A. in 2012, and news articles spanning a large number of years and 100s of different disasters. Each message maps to one or more of 36 possible categories categories related to disaster response. Messages are provided in their original language, as well as their English translation and they have been stripped of sensitive information. (Source: [Hugging Face Data Summary](https://huggingface.co/datasets/disaster_response_messages)
+
+This dataset was curated by Appen (formerly Figure Eight). More information about Appen can be found [here](https://appen.com/).
 
 ## File Descriptions <a name="files"></a>
 | File | Description |
@@ -61,7 +60,9 @@ In sum, a multi-label classifier is needed to identify messages corresponding to
 | app/templates/base.html | jinja template used to render the main page of the web app |
 | app/templates/go.html | jinja template used to render the classification result of the web app |
 
-Included is a notebook available here to showcase work related to the above questions. Markdown cells are used to walk the reader through the analysis performed. The raw survey response data used in this analysis is openly available on Kaggle available [here](https://www.kaggle.com/c/kaggle-survey-2021/data).
+## Methodology <a name="method"></a>
+
+
 
 ## Results <a name="results"></a>
 <img src="images/Heavy rain poured down in downtown Yangon (Photo-Nay Won Htet).jpg" >
