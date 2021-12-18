@@ -26,7 +26,7 @@ Photo: Mark Wilson/Getty Images
 4. To view the Flask app, open up a browser and go to http://localhost:3001/
 
 ## Project Motivation <a name="motivation"></a>
-The purpose of this repository is to demonstrate the use of an ETL (extract, transform, load) and machine learning pipeline in the deployment of a language model using a Flask web application.
+The purpose of this repository is to demonstrate the use of an ETL (extract, transform, load) and machine learning pipeline to develop a language model deployed using a Flask web application.
 
 The theme of the project is centered around the open problem of how to efficiently interpret communications transmitted during a natural disaster to best respond with the appropriate forms of aid. This remains a challenging task because there is typically a large volume of messages that come through social networks and other forms of media and often only a fraction of them directly relate to an immediate need. It is critical that disaster responders know what this need is (food, water, medical aid, electricity) so that the proper aid organizations can be routed to those affected.
 
