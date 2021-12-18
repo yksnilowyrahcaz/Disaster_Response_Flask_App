@@ -1,7 +1,7 @@
 # Disaster Response Pipeline Project
 
-<img src="images/Heavy rain poured down in downtown Yangon (Photo-Nay Won Htet).jpg" >
-Photo-Nay Won Htet
+<img src="images/hurricane-ike-2008 PHOTO BY MARK WILSON GETTY IMAGES.jpg" >
+Photo By Mark Wilson, Getty Images
 
 ## Table of Contents
 
