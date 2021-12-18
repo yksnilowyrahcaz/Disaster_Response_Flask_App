@@ -72,7 +72,7 @@ Several algorithms were considered in `ml_pipeline_preparation.ipynb`, including
 <img src="images/Heavy rain poured down in downtown Yangon (Photo-Nay Won Htet).jpg" >
 Photo: Nay Won Htet
 
-
+<img src="images/classification_report.jpg" >
 
 ## Licensing, Authors, Acknowledgements <a name="licensing"></a>
 Many thanks to Kaggle for administering the survey and all respondents for providing responses. You can find the Licensing for the data and other descriptive information at the Kaggle link available [here](https://www.kaggle.com/c/kaggle-survey-2021). Please feel free to use the code and notebook as you like.
