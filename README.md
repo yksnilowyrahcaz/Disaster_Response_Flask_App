@@ -90,7 +90,7 @@ The flask app provided in this repository has seperately been deployed using [He
 
 The final model learned using the boosted random forest algorithm yielded a weighted average score of 76% precision, 55% recall and 60% F1-score (harmonic mean of precision and recall). Precision is the proportion of positive samples predicted by the model that were in fact positive samples. Recall is the proportion of true positive samples were correctly predicted by the model. Accuracy is the proportion predictions, positive and negative, that were correct classification. Note that although the model's final accuracy happened to be 94.53%, accuracy as a performance metric can be misleading because the dataset used to train on is imbalanced. For example, there are many more messages labeled as "aid_related" than there are for messages labeled as "water", and fewer yet that are labeled as "search_and_rescue". Precision and recall can be more helpful metrics in this context.
 
-<img src="images/classification_report.jpg" >
+        <img src="images/classification_report.jpg" >
 
 The following images show the output of the app after entering the message, "If you receive this message, please help as soon as you can because a power line went down during the wind storm and many of us need medical care and we are desperately thirsty". Notice that the model appropriately maps "power line" to electricity and "thirsty" to water:
 
