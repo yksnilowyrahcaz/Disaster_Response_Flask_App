@@ -13,8 +13,8 @@ Photo: Mark Wilson/Getty Images
 8. [Licensing, Authors, and Acknowledgements](#licensing)
 
 ## How To Use This Repository <a name="howto"></a>
-1. Download the zip file of this directory
-2. Navigate to this directory on your machine. For the purposes of running the scripts, this will be the root directory.
+1. Download and unzip this reqpository to your local machine.
+2. Navigate to this directory. For the purposes of running the scripts, this will be the root directory.
 3. Open the command line from this root directory and run the following commands to set up your database and model.
     - To run the ETL pipeline that cleans data and stores in a database, type the following in the command line:
         
