@@ -13,6 +13,8 @@ Photo: Mark Wilson/Getty Images
 8. [Licensing, Authors, and Acknowledgements](#licensing)
 
 ## How To Use This Repository <a name="howto"></a>
+To see the end result of this project, please visit the Heroku hosted website [here](https://disaster-response-flask-webapp.herokuapp.com/). This can be recreated and run on your local machine by completing the following steps:
+
 1. Download and unzip this reqpository to your local machine.
 2. Navigate to this directory and open the command line. For the purposes of running the scripts, this will be the root directory.
 3. Create a virtual environment to store the supporting packages
