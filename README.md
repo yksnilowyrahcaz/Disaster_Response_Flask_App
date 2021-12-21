@@ -17,17 +17,17 @@ Photo: Mark Wilson/Getty Images
 2. Navigate to this directory. For the purposes of running the scripts, this will be the root directory.
 3. To run the ETL pipeline that cleans data and stores in a database, type the following in the command line:
         
-        `python data/process_data.py data/messages.csv data/categories.csv data/CategorizedMessages.db`
+        python data/process_data.py data/messages.csv data/categories.csv data/CategorizedMessages.db
     
 4. To run the ML pipeline that trains classifier and saves, type the following in the command line:
        
-        `python models/train_classifier.py data/CategorizedMessages.db models/classifier.pkl`
+        python models/train_classifier.py data/CategorizedMessages.db models/classifier.pkl
        
 Note: training the model might take a couple minutes.
        
 5. To run the Flask app, type the following in the command line:
        
-       `python app/run.py`
+       python app/run.py
        
 6. To view the Flask app being served on your local machine, open up a browser and go to http://localhost:3001/ if you are using Windows, or http://0.0.0.0:3001/ if you are using MacOS.
 
