@@ -24,7 +24,7 @@ Photo: Mark Wilson/Getty Images
        
        `python models/train_classifier.py data/CategorizedMessages.db models/classifier.pkl`
        
-       Note training the model might take a couple minutes.
+       Note: training the model might take a couple minutes.
        
 4. To run the Flask app, type the following in the command line:
        
