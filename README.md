@@ -41,6 +41,9 @@ The purpose of this repository is to demonstrate the use of an ETL (extract, tra
 The crux of the problem is how to efficiently and effectively interpret communications transmitted during a natural disaster to best respond with the appropriate forms of aid. This remains a challenge because there is typically a large volume of messages that come from social networks and other sources during a natural disaster. Often only a fraction of messages directly relate to a need for assistance and some requests for help are more urgent than others. It is critical that disaster responders can identify the need (food, water, medical aid, electricity) so that the proper aid organizations can be routed to those affected. In sum, the objective is to produce a multi-label classifier that can categorize messages into one or more categories.
 
 ## About The Dataset <a name="data"></a>
+
+<!-- <img src="images/classification_report.jpg" > -->
+
 The messages.csv and categories.csv data files contain 26,248 records representing messages communicated during actual events including an earthquake in Haiti in 2010, an earthquake in Chile in 2010, floods in Pakistan in 2010, super-storm Sandy in the U.S.A. in 2012, and news articles spanning a large number of years and 100s of different disasters. Each message maps to one or more of 36 possible categories categories related to disaster response. Messages are provided in their original language, as well as their English translation and they have been stripped of sensitive information. (Source: [Hugging Face Data Summary](https://huggingface.co/datasets/disaster_response_messages))
 
 ## File Descriptions <a name="files"></a>
@@ -81,4 +84,4 @@ Photo: Nay Won Htet
 <img src="images/classification_report.jpg" >
 
 ## Licensing, Authors, Acknowledgements <a name="licensing"></a>
-The data used in this project were curated by [Appen (formerly Figure Eight)](https://appen.com/) and are openly available for use. The dataset was obtained through Udacity as part of the [Data Scientist Nanodegree Program](https://www.udacity.com/blog/2018/05/introducing-udacity-data-scientist-nanodegree-program.html). Please feel free to use the code in this repository as you like.
+The data used in this project were curated by [Appen (formerly Figure Eight)](https://appen.com/) and are openly available for use. The dataset was obtained through the [Udacity Data Scientist Nanodegree Program](https://www.udacity.com/blog/2018/05/introducing-udacity-data-scientist-nanodegree-program.html). Please feel free to use the code in this repository as you like.
