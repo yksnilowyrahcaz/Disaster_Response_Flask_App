@@ -1,48 +1,25 @@
+import sys
+from pathlib import Path
+sys.path.insert(0,'\\'.join(Path.cwd().as_posix().split('/')))
+
 import re
 import json
-import plotly
 import joblib
 import pandas as pd
+import plotly
+import plotly.express as px
 
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
+from models.train_classifier import tokenize
 
 from flask import Flask
 from flask import render_template, request, jsonify
-from plotly.graph_objs import Bar
+from plotly.graph_objs import Bar, Pie
 from sqlalchemy import create_engine
 
 app = Flask(__name__)
-
-def tokenize(text):
-    '''
-    Convert a string of text into a list of tokens
-    
-    Parameters
-        text: str, containing the text to be tokenized
-        
-    Returns
-        clean_tokens: list, containing normalized, tokenized and lemmatized text
-    '''
-    # detect and replace urls with placeholder
-    url_regex = 'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+'
-    detected_urls = re.findall(url_regex, text)
-    for url in detected_urls:
-        text = text.replace(url, 'urlplaceholder')
-
-    # case normalize and remove punctuation, except for $ sign
-    text = re.sub(r'[^a-zA-Z$]', ' ', text.lower())
-    
-    # tokenize
-    tokens = word_tokenize(text)
-    
-    # remove stop words and lemmatize
-    lem = WordNetLemmatizer()
-    stop_words = stopwords.words('english')
-    clean_tokens = [lem.lemmatize(tok).strip() for tok in tokens if tok not in stop_words]
-
-    return clean_tokens
 
 # load data
 engine = create_engine('sqlite:///data/CategorizedMessages.db')
@@ -52,45 +29,42 @@ df = pd.read_sql_table('CategorizedMessages', engine)
 model = joblib.load('models/classifier.pkl')
 
 @app.route('/')
-@app.route('/index')
-def index():
+@app.route('/base')
+def base():
     '''
-    index webpage displays cool visuals and receives user input text for model
+    base webpage to display visuals and receive user input text for model
     '''
     # extract data needed for visuals
-    # TODO: Below is an example - modify to extract data for your own visuals
-    genre_counts = df.groupby('genre').count()['message']
-    genre_names = list(genre_counts.index)
+    genre_counts = df.groupby('genre').count()['message'].reset_index()
+    category_counts = df.iloc[:,2:].sum().reset_index().sort_values(by=0)
+    category_counts.columns = ['category','count']
     
-    # create visuals
-    # TODO: Below is an example - modify to create your own visuals
-    graphs = [
-        {
-            'data': [
-                Bar(
-                    x=genre_names,
-                    y=genre_counts
-                )
-            ],
+    # create figures for the visualizations
+    fig1 = px.pie(genre_counts, names='genre', values='message', labels='genre',
+                  title='Composition of the dataset by message genre', hole=0.3,
+                  color_discrete_sequence=px.colors.qualitative.Dark2_r, 
+                  width=500, height=500).update_traces(marker_line_color='rgb(0,0,0)',
+                                                       hovertemplate='Genre: %{label}',
+                                                       textfont_size=15,
+                                                       marker_line_width=1)
 
-            'layout': {
-                'title': 'Distribution of Message Genres',
-                'yaxis': {
-                    'title': "Count"
-                },
-                'xaxis': {
-                    'title': "Genre"
-                }
-            }
-        }
-    ]
-    
+    fig2 = px.bar(category_counts, x='count', y='category', color='count',
+                  color_continuous_scale= px.colors.sequential.Aggrnyl_r,
+                  title='Composition of the dataset by category', text='count',
+                  hover_data={'count':':,.0f'},orientation='h', range_x=[0,22000], 
+                  width=700, height=700).update_traces(marker_line_color='rgb(0,0,0)', 
+                                                       marker_line_width=1,
+                                                       texttemplate='%{text:,.0f}',
+                                                       hovertemplate='Category: %{y}'+
+                                                       '<br>Count: %{text:,.0f}</br>',
+                                                       textposition='outside')
     # encode plotly graphs in JSON
+    graphs = [fig1, fig2]
     ids = [f'graph-{i}' for i, _ in enumerate(graphs)]
     graphJSON = json.dumps(graphs, cls=plotly.utils.PlotlyJSONEncoder)
     
     # render web page with plotly graphs
-    return render_template('index.html', ids=ids, graphJSON=graphJSON)
+    return render_template('base.html', ids=ids, graphJSON=graphJSON)
 
 @app.route('/go')
 def go():
