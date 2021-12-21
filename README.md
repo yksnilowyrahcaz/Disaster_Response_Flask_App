@@ -18,7 +18,7 @@ Photo: Mark Wilson/Getty Images
 3. Open the command line from this root directory and run the following commands to set up your database and model.
     - To run the ETL pipeline that cleans data and stores in a database, type the following in the command line:
         
-        `python data/process_data.py data/messages.csv data/categories.csv data/CategorizedMessages.db`
+       `python data/process_data.py data/messages.csv data/categories.csv data/CategorizedMessages.db`
     
     - To run the ML pipeline that trains classifier and saves, type the following in the command line:
        
