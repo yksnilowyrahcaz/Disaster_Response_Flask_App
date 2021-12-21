@@ -44,7 +44,7 @@ The crux of the problem is how to efficiently and effectively interpret communic
 
 <img src="images/overview_training_data.jpg" >
 
-The messages.csv and categories.csv data files contain 26,248 records representing messages communicated during actual events including an earthquake in Haiti in 2010, an earthquake in Chile in 2010, floods in Pakistan in 2010, super-storm Sandy in the U.S.A. in 2012, and news articles spanning a large number of years and 100s of different disasters. Each message maps to one or more of 36 possible categories categories related to disaster response. Messages are provided in their original language, as well as their English translation and they have been stripped of sensitive information. (Source: [Hugging Face Data Summary](https://huggingface.co/datasets/disaster_response_messages))
+The messages.csv and categories.csv data files contain 26,248 records representing messages communicated during actual events including an earthquake in Haiti in 2010, an earthquake in Chile in 2010, floods in Pakistan in 2010, super-storm Sandy in the U.S.A. in 2012, and news articles spanning a large number of years and 100s of different disasters. Each message maps to one or more of 36 possible categories categories related to disaster response. Note: the "child_alone" category was removed from training because none of the messages had this label, thus no new information was gained from modeling the messages on this label. Messages are provided in their original language, as well as their English translation and they have been stripped of sensitive information. (Source: [Hugging Face Data Summary](https://huggingface.co/datasets/disaster_response_messages))
 
 ## File Descriptions <a name="files"></a>
 | File | Description |
@@ -80,6 +80,14 @@ sklearn's `GridSearchCV` class was used to tune the `ngram_range` and `max_featu
 ## Results <a name="results"></a>
 <img src="images/Heavy rain poured down in downtown Yangon (Photo-Nay Won Htet).jpg" >
 Photo: Nay Won Htet
+
+<img src="images/homepage.jpg" >
+
+<img src="images/classify_1" >
+
+<img src="images/classify_2" >
+
+<img src="images/classify_3" >
 
 <img src="images/classification_report.jpg" >
 
