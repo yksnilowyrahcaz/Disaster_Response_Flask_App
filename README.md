@@ -24,8 +24,12 @@ Photo: Mark Wilson/Getty Images
        
        `python models/train_classifier.py data/CategorizedMessages.db models/classifier.pkl`
        
+       Note training the model might take a couple minutes.
+       
 4. To run the Flask app, type the following in the command line:
-        `python app/run.py`
+       
+       `python app/run.py`
+       
 5. To view the Flask app, open up a browser and go to http://localhost:3001/
 
 ## Supporting Packages <a name="packages"></a>
@@ -85,7 +89,7 @@ sklearn's `GridSearchCV` class was used to tune the `ngram_range` and `max_featu
 
 The flask app provided in this repository has seperately been deployed using [Heroku](https://www.heroku.com/home) and can be found [here](https://disaster-response-flask-webapp.herokuapp.com/) to see what the final app will look like if you run it on your local machine.
 
-The final model learned using the boosted random forest algorithm yielded a weighted average score of 76% precision, 55% recall and 60% F1-score (harmonic mean of precision and recall). Precision is the proportion of positive samples predicted by the model that were in fact positive samples. Recall is the proportion of true positive samples were correctly predicted by the model. Accuracy is the proportion predictions, positive and negative, that were correct classification. Note that although the model's final accuracy happened to be ~94%, accuracy as a performance metric can be misleading because the dataset used to train on is imbalanced. For example, there are many more messages labeled as "aid_related" than there are for messages labeled as "water", and fewer yet that are labeled as "search_and_rescue". Precision and recall can be more helpful metrics in this context.
+The final model learned using the boosted random forest algorithm yielded a weighted average score of 76% precision, 55% recall and 60% F1-score (harmonic mean of precision and recall). Precision is the proportion of positive samples predicted by the model that were in fact positive samples. Recall is the proportion of true positive samples were correctly predicted by the model. Accuracy is the proportion predictions, positive and negative, that were correct classification. Note that although the model's final accuracy happened to be 94.53%, accuracy as a performance metric can be misleading because the dataset used to train on is imbalanced. For example, there are many more messages labeled as "aid_related" than there are for messages labeled as "water", and fewer yet that are labeled as "search_and_rescue". Precision and recall can be more helpful metrics in this context.
 
 <img src="images/classification_report.jpg" >
 
