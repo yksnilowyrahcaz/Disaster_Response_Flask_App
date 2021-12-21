@@ -15,31 +15,33 @@ Photo: Mark Wilson/Getty Images
 ## How To Use This Repository <a name="howto"></a>
 1. Download and unzip this reqpository to your local machine.
 2. Navigate to this directory and open the command line. For the purposes of running the scripts, this will be the root directory.
-3. Create and activate a virtual environment to store the supporting packages
+3. Create a virtual environment to store the supporting packages
 
         python -m venv ./venv
-        
+
+4. Activate the virtual environment
+
         .\venv\Scripts\activate
 
-4. Install the supporting packages from the requirements.txt file
+5. Install the supporting packages from the requirements.txt file
 
         pip install -r requirements.txt
         
-5. To run the ETL pipeline that cleans data and stores in a database, type the following in the command line:
+6. To run the ETL pipeline that cleans data and stores in a database, type the following in the command line:
         
         python data/process_data.py data/messages.csv data/categories.csv data/CategorizedMessages.db
     
-6. To run the ML pipeline that trains classifier and saves, type the following in the command line:
+7. To run the ML pipeline that trains classifier and saves, type the following in the command line:
        
         python models/train_classifier.py data/CategorizedMessages.db models/classifier.pkl
        
 Note: training the model might take a couple minutes.
        
-7. To run the Flask app, type the following in the command line:
+8. To run the Flask app, type the following in the command line:
        
        python app/run.py
        
-8. To view the Flask app being served on your local machine, open up a browser and go to http://localhost:3001/ if you are using Windows, or http://0.0.0.0:3001/ if you are using MacOS.
+9. To view the Flask app being served on your local machine, open up a browser and go to http://localhost:3001/ if you are using Windows, or http://0.0.0.0:3001/ if you are using MacOS.
 
 ## Supporting Packages <a name="packages"></a>
 In addition to the standard python libraries, this notebook and analysis rely on the following packages:
