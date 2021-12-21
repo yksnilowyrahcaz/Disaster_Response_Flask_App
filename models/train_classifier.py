@@ -2,7 +2,7 @@
 import re
 import sys
 import time
-import pickle
+import joblib
 import numpy as np
 import pandas as pd
 from pathlib import Path
@@ -17,7 +17,7 @@ from nltk.stem import WordNetLemmatizer
 from xgboost import XGBRFClassifier
 from sklearn.pipeline import Pipeline
 from sklearn.metrics import classification_report
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.multioutput import MultiOutputClassifier
 from sklearn.feature_extraction.text import TfidfVectorizer
 
@@ -76,16 +76,28 @@ def tokenize(text):
 
 def build_model():
     '''
-    Construct a Pipeline instance that vectorizes text and performs multi-label classification
+    Construct a GridSearchCV class instance that vectorizes text and performs multi-label classification
     
     Returns
-        pipeline: sklearn.pipeline.Pipeline, includes transformer and estimator
+        cv: sklearn.model_selection.GridSearchCV class instance constructed with sklearn.pipeline.Pipeline,
+            sklearn.feature_extraction.text.TfidfVectorizer, sklearn.multioutput.MultiOutputClassifier,
+            and xgboost.XGBRFClassifier class instances
     '''
     pipeline = Pipeline([
-    ('tfidf', TfidfVectorizer(tokenizer=tokenize, max_features=10000, ngram_range=(1,2))),
+    ('tfidf', TfidfVectorizer(tokenizer=tokenize)),
     ('clf', MultiOutputClassifier(XGBRFClassifier(use_label_encoder=False, verbosity=0, learning_rate=0.1)))
-])
-    return pipeline
+    
+    ])
+    
+    parameters = {
+    'tfidf__ngram_range': ((1, 1),(1, 2)),
+    'tfidf__max_features': (5000, 10000),
+    'clf__estimator__learning_rate': (0.01, 0.1),
+    }
+
+    grid = GridSearchCV(pipeline, param_grid=parameters, verbose=2, cv=5, n_jobs=4)
+    
+    return grid
 
 def evaluate_model(model, X_test, Y_test, category_names):
     '''
@@ -112,7 +124,7 @@ def save_model(model, model_filepath):
         model: estimator, in this case the pipeline constructed from build_model()
         model_filepath: str, the file path where the pickled model will be saved
     '''
-    pickle.dump(model, open(f'{model_filepath}', 'wb'))
+    joblib.dump(model, open(f'{model_filepath}', 'wb'))
 
 def main():
     if len(sys.argv) == 3:
