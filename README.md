@@ -79,13 +79,17 @@ sklearn's `GridSearchCV` class was used to tune the `ngram_range` and `max_featu
 
 ## Results <a name="results"></a>
 
+The final model learned using the boosted random forest algorithm yielded a weighted average score of 76% precision, 55% recall and 60% F1-score (harmonic mean of precision and recall). Precision is the proportion of positive samples predicted by the model that were in fact positive samples. Recall is the proportion of true positive samples were correctly predicted by the model. Accuracy is the proportion predictions, positive and negative, that were correct classification. In this case, the model's final accuracy was ~94%.
+
+<img src="images/classification_report.jpg" >
+
+The following images show the output of the app after entering the message, "If you receive this message, please help as soon as you can because a power line went down during the wind storm and many of us need medical care and we are desperately thirsty":
+
 <img src="images/classify_1.jpg" >
 
 <img src="images/classify_2.jpg" >
 
 <img src="images/classify_3.jpg" >
-
-<img src="images/classification_report.jpg" >
 
 ## Licensing, Authors, Acknowledgements <a name="licensing"></a>
 The data used in this project were curated by [Appen (formerly Figure Eight)](https://appen.com/) and are openly available for use. The dataset was obtained through the [Udacity Data Scientist Nanodegree Program](https://www.udacity.com/blog/2018/05/introducing-udacity-data-scientist-nanodegree-program.html). Please feel free to use the code in this repository as you like.
