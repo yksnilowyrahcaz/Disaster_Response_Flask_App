@@ -78,10 +78,6 @@ Decision trees, which ensemble to form random forests, are greedy algorithms tha
 sklearn's `GridSearchCV` class was used to tune the `ngram_range` and `max_features` parameters of the `TfidfVectorizer`, as well as the `learning_rate` parameter of the `XGBRFClassifer`, while also performing 5-fold cross-validation. The best parameter combination turned out to be `ngram_range=((1,2))`, `max_features=10000`, and `learning_rate=0.1`.
 
 ## Results <a name="results"></a>
-<img src="images/Heavy rain poured down in downtown Yangon (Photo-Nay Won Htet).jpg" >
-Photo: Nay Won Htet
-
-<img src="images/homepage.jpg" >
 
 <img src="images/classify_1.jpg" >
 
