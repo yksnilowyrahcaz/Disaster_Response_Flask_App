@@ -83,11 +83,11 @@ Photo: Nay Won Htet
 
 <img src="images/homepage.jpg" >
 
-<img src="images/classify_1" >
+<img src="images/classify_1.jpg" >
 
-<img src="images/classify_2" >
+<img src="images/classify_2.jpg" >
 
-<img src="images/classify_3" >
+<img src="images/classify_3.jpg" >
 
 <img src="images/classification_report.jpg" >
 
