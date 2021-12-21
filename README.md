@@ -10,7 +10,7 @@ Photo: Mark Wilson/Getty Images
 5. [File Descriptions](#files)
 6. [Methodology](#method)
 7. [Results](#results)
-8. [Licensing, Authors, and Acknowledgements](#licensing)
+8. [Sources & References](#sources)
 
 ## How To Use This Repository <a name="howto"></a>
 The flask app provided in this repository is separately deployed using [Heroku](https://www.heroku.com/home) and can be found [here](https://disaster-response-flask-webapp.herokuapp.com/). This can be recreated and run on your local machine by completing the following steps:
@@ -115,5 +115,5 @@ The following images show the output of the app after entering the message, "If 
 
 <img src="images/classify_3.jpg" >
 
-## Licensing, Authors, Acknowledgements <a name="licensing"></a>
-The data used in this project were curated by [Appen (formerly Figure Eight)](https://appen.com/) and are openly available for use. The dataset was obtained through the [Udacity Data Scientist Nanodegree Program](https://www.udacity.com/blog/2018/05/introducing-udacity-data-scientist-nanodegree-program.html). Please feel free to use the data and code from this repository as you like. Many thanks to the Udacity instructors for their guidance in developing this project.
+## Sources & References <a name="sources"></a>
+The data used in this project were curated by [Appen (formerly Figure Eight)](https://appen.com/) and are openly available for use. The dataset was obtained through the [Udacity Data Scientist Nanodegree Program](https://www.udacity.com/blog/2018/05/introducing-udacity-data-scientist-nanodegree-program.html). Rahul Pandey's blog post, ["A simple guide to deploy machine learning model on Heroku"](https://medium.com/analytics-vidhya/a-simple-guide-to-deploy-machine-learning-model-on-heroku-4ccbae6d2b7b) was helpful for getting the project onto the internet. Please feel free to use the data and code from this repository as you like. 
