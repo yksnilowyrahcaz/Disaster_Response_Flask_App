@@ -42,7 +42,7 @@ The crux of the problem is how to efficiently and effectively interpret communic
 
 ## About The Dataset <a name="data"></a>
 
-<!-- <img src="images/classification_report.jpg" > -->
+<img src="images/overview_training_data.jpg" >
 
 The messages.csv and categories.csv data files contain 26,248 records representing messages communicated during actual events including an earthquake in Haiti in 2010, an earthquake in Chile in 2010, floods in Pakistan in 2010, super-storm Sandy in the U.S.A. in 2012, and news articles spanning a large number of years and 100s of different disasters. Each message maps to one or more of 36 possible categories categories related to disaster response. Messages are provided in their original language, as well as their English translation and they have been stripped of sensitive information. (Source: [Hugging Face Data Summary](https://huggingface.co/datasets/disaster_response_messages))
 
