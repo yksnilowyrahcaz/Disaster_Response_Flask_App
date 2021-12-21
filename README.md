@@ -13,9 +13,9 @@ Photo: Mark Wilson/Getty Images
 8. [Licensing, Authors, and Acknowledgements](#licensing)
 
 ## How To Use This Repository <a name="howto"></a>
-The flask app provided in this repository is seperately deployed using [Heroku](https://www.heroku.com/home) and can be found [here](https://disaster-response-flask-webapp.herokuapp.com/). This can be recreated and run on your local machine by completing the following steps:
+The flask app provided in this repository is separately deployed using [Heroku](https://www.heroku.com/home) and can be found [here](https://disaster-response-flask-webapp.herokuapp.com/). This can be recreated and run on your local machine by completing the following steps:
 
-1. Download and unzip this reqpository to your local machine.
+1. Download and unzip this repository to your local machine.
 2. Navigate to this directory and open the command line. For the purposes of running the scripts, this will be the root directory.
 3. Create a virtual environment to store the supporting packages
 
@@ -43,7 +43,7 @@ Note: training the model might take a couple minutes.
        
        python app/run.py
        
-9. To view the Flask app being served on your local machine, open up a browser and go to http://localhost:3001/ if you are using Windows, or http://0.0.0.0:3001/ if you are using MacOS.
+9. To view the Flask app being served on your local machine, open a browser, and go to http://localhost:3001/ if you are using Windows, or http://0.0.0.0:3001/ if you are using MacOS.
 
 ## Supporting Packages <a name="packages"></a>
 In addition to the standard python libraries, this notebook and analysis rely on the following packages:
@@ -65,14 +65,14 @@ The crux of the problem is how to efficiently and effectively interpret communic
 
 <img src="images/overview_training_data.jpg" >
 
-The messages.csv and categories.csv data files contain 26,248 records representing messages communicated during actual events including an earthquake in Haiti in 2010, an earthquake in Chile in 2010, floods in Pakistan in 2010, super-storm Sandy in the U.S.A. in 2012, and news articles spanning a large number of years and 100s of different disasters. Each message maps to one or more of 36 possible categories categories related to disaster response. Note: the "child_alone" category was removed from training because none of the messages had this label, thus no new information was gained from modeling the messages on this label. Messages are provided in their original language, as well as their English translation and they have been stripped of sensitive information. (Source: [Hugging Face Data Summary](https://huggingface.co/datasets/disaster_response_messages))
+The messages.csv and categories.csv data files contain 26,248 records representing messages communicated during actual events including an earthquake in Haiti in 2010, an earthquake in Chile in 2010, floods in Pakistan in 2010, super-storm Sandy in the U.S.A. in 2012, and news articles spanning many years and 100s of different disasters. Each message maps to one or more of 36 possible categories related to disaster response. Note: the "child_alone" category was removed from training because none of the messages had this label, thus no new information was gained from modeling the messages on this label. Messages are provided in their original language, as well as their English translation and they have been stripped of sensitive information. (Source: [Hugging Face Data Summary](https://huggingface.co/datasets/disaster_response_messages))
 
 ## File Descriptions <a name="files"></a>
 | File | Description |
 | :--- | :--- |
 | data/messages.csv | fields: id, message, original, genre |
 | data/categories.csv | fields: id, categories (aid_related, water, etc.) |
-| data/etl_pipeline_preparation.ipynb | jupter notebook with code used to develop process_data.py |
+| data/etl_pipeline_preparation.ipynb | jupyter notebook with code used to develop process_data.py |
 | data/process_data.py | etl script that cleans the data for analysis |
 | data/CategorizedMessages.db | resulting database from running process_data.py | 
 | models/ml_pipeline_preparation.ipynb | jupyter notebook used to develop train_classifier.py |
@@ -85,16 +85,16 @@ The messages.csv and categories.csv data files contain 26,248 records representi
 ## Methodology <a name="method"></a>
 
 ### ETL Pipeline
-To prepare the messages and categories data for modeling, each file was loaded into a pandas dataframe and an intial pass was made of removing duplicates. Hidden duplicates were identified within the categories data, in which the same id and message occurred more than once with a different set of category labels. This can be seen by using the `.duplicated(keep=False)` method on the categories dataframe. 
+To prepare the messages and categories data for modeling, each file was loaded into a pandas dataframe and an initial pass was made of removing duplicates. Hidden duplicates were identified within the categories data, in which the same id and message occurred more than once with a different set of category labels. This can be seen by using the `.duplicated(keep=False)` method on the categories dataframe. 
 
-Upon further investigation it was noted that for each hidden duplicate pair, one had one ore more fewer labels that appeared relevant to the message. Judgement was used to choose the duplicate with the most "1" labels, oeprating on the assumption that false negatives are worse than false positives. 
+Upon further investigation it was noted that for each hidden duplicate pair, one had one or more fewer labels that appeared relevant to the message. Judgement was used to choose the duplicate with the most "1" labels, operating on the assumption that false negatives are worse than false positives. 
 
 After filtering out duplicates using this criterion, the categories data was binarized merged with the messages based on common id. Record id # and original (untranslated) messages were dropped from the dataset since they are not used in modeling. Also, the "child_alone" label was dropped because none of the messages were from this category and it did not provide any additional information. The resulting dataframe was saved to a sqlite database.
 
 ### Machine Learning Pipeline
 Several algorithms were considered in `ml_pipeline_preparation.ipynb`, including sklearn's support vector classifier, multi-layer perceptron (neural network), random forest, and xgboost's boosted random forest classifier. Ultimately, the `XGBRFClassifier` boosted random forest was chosen because it yielded reasonable precision, recall and f1-scores with significantly faster training time. 
 
-Decision trees, which ensemble to form random forests, are greedy algorithms that proceed to divide a feature space based on the previous state rather than a global optimum. For this reason trees are efficient. Alone they easily overfit, but as an ensemble, boosted by weighting subsequently selected training samples relative to their residual from the previous tree, better generalization can be achieved.
+Decision trees, which ensemble to form random forests, are greedy algorithms that proceed to divide a feature space based on the previous state rather than a global optimum. For this reason, trees are efficient. Alone they easily overfit, but as an ensemble, boosted by weighting subsequently selected training samples relative to their residual from the previous tree, better generalization can be achieved.
 
 sklearn's `GridSearchCV` class was used to tune the `ngram_range` and `max_features` parameters of the `TfidfVectorizer`, as well as the `learning_rate` parameter of the `XGBRFClassifer`, while also performing 5-fold cross-validation. The best parameter combination turned out to be `ngram_range=((1,2))`, `max_features=10000`, and `learning_rate=0.1`.
 
