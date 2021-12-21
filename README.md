@@ -101,4 +101,4 @@ The following images show the output of the app after entering the message, "If 
 <img src="images/classify_3.jpg" >
 
 ## Licensing, Authors, Acknowledgements <a name="licensing"></a>
-The data used in this project were curated by [Appen (formerly Figure Eight)](https://appen.com/) and are openly available for use. The dataset was obtained through the [Udacity Data Scientist Nanodegree Program](https://www.udacity.com/blog/2018/05/introducing-udacity-data-scientist-nanodegree-program.html). Please feel free to use the code in this repository as you like.
+The data used in this project were curated by [Appen (formerly Figure Eight)](https://appen.com/) and are openly available for use. The dataset was obtained through the [Udacity Data Scientist Nanodegree Program](https://www.udacity.com/blog/2018/05/introducing-udacity-data-scientist-nanodegree-program.html). Please feel free to use the data and code from this repository as you like. Many thanks to the Udacity instructors for their guidance in developing this project.
