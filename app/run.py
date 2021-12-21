@@ -52,7 +52,7 @@ def base():
                   color_continuous_scale= px.colors.sequential.Aggrnyl_r,
                   title='Composition of the dataset by category', text='count',
                   hover_data={'count':':,.0f'},orientation='h', range_x=[0,22000], 
-                  width=700, height=700).update_traces(marker_line_color='rgb(0,0,0)', 
+                  width=600, height=700).update_traces(marker_line_color='rgb(0,0,0)', 
                                                        marker_line_width=1,
                                                        texttemplate='%{text:,.0f}',
                                                        hovertemplate='Category: %{y}'+
