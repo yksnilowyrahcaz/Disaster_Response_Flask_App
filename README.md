@@ -13,7 +13,7 @@ Photo: Mark Wilson/Getty Images
 8. [Licensing, Authors, and Acknowledgements](#licensing)
 
 ## How To Use This Repository <a name="howto"></a>
-To see the end result of this project, please visit the Heroku hosted website [here](https://disaster-response-flask-webapp.herokuapp.com/). This can be recreated and run on your local machine by completing the following steps:
+The flask app provided in this repository has seperately been deployed using [Heroku](https://www.heroku.com/home) and can be found [here](https://disaster-response-flask-webapp.herokuapp.com/). This can be recreated and run on your local machine by completing the following steps:
 
 1. Download and unzip this reqpository to your local machine.
 2. Navigate to this directory and open the command line. For the purposes of running the scripts, this will be the root directory.
@@ -99,9 +99,6 @@ Decision trees, which ensemble to form random forests, are greedy algorithms tha
 sklearn's `GridSearchCV` class was used to tune the `ngram_range` and `max_features` parameters of the `TfidfVectorizer`, as well as the `learning_rate` parameter of the `XGBRFClassifer`, while also performing 5-fold cross-validation. The best parameter combination turned out to be `ngram_range=((1,2))`, `max_features=10000`, and `learning_rate=0.1`.
 
 ## Results <a name="results"></a>
-
-The flask app provided in this repository has seperately been deployed using [Heroku](https://www.heroku.com/home) and can be found [here](https://disaster-response-flask-webapp.herokuapp.com/) to see what the final app will look like if you run it on your local machine.
-
 The final model learned using the boosted random forest algorithm yielded a weighted average score of 76% precision, 55% recall and 60% F1-score (harmonic mean of precision and recall). Precision is the proportion of positive samples predicted by the model that were in fact positive samples. Recall is the proportion of true positive samples were correctly predicted by the model. Accuracy is the proportion predictions, positive and negative, that were correct classification. 
 
 Note that although the model's final accuracy happened to be 94.53%, accuracy as a performance metric can be misleading because the dataset used to train on is imbalanced. For example, there are many more messages labeled as "aid_related" than there are for messages labeled as "water", and fewer yet that are labeled as "search_and_rescue". Precision and recall can be more helpful metrics in this context.
