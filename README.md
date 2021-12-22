@@ -89,7 +89,7 @@ To prepare the messages and categories data for modeling, each file was loaded i
 
 Upon further investigation it was noted that for each hidden duplicate pair, one had one or more fewer labels that appeared relevant to the message. Judgement was used to choose the duplicate with the most "1" labels, operating on the assumption that false negatives are worse than false positives. 
 
-After filtering out duplicates using this criterion, the categories data was binarized merged with the messages based on common id. Record id # and original (untranslated) messages were dropped from the dataset since they are not used in modeling. Also, the "child_alone" label was dropped because none of the messages were from this category and it did not provide any additional information. The resulting dataframe was saved to a sqlite database.
+After filtering out duplicates using this criterion, the categories data was binarized and merged with the messages based on common id. Record id # and original (untranslated) messages were dropped from the dataset since they are not used in modeling. Also, the "child_alone" label was dropped because none of the messages were from this category and it did not provide any additional information. The resulting dataframe was saved to a sqlite database.
 
 ### Machine Learning Pipeline
 Several algorithms were considered in `ml_pipeline_preparation.ipynb`, including sklearn's support vector classifier, multi-layer perceptron (neural network), random forest, and xgboost's boosted random forest classifier. Ultimately, the `XGBRFClassifier` boosted random forest was chosen because it yielded reasonable precision, recall and f1-scores with significantly faster training time. 
