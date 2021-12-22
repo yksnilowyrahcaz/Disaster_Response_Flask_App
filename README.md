@@ -106,19 +106,19 @@ Note that although the model's final accuracy happened to be ~95%, accuracy as a
 Here are the results from grid search:
 
 <p align="center">
-<img src="images/cv_results.jpg" />
+
 </p>
 
 The following shows the parameters of the final model that is deployed, with tuned parameters highlighted in green:
 
 <p align="center">
-<img src="images/final_model.jpg" />
+
 </p>
 
 And here is the resulting classification report:
 
 <p align="center">
-<img src="images/classification_report.jpg" />
+
 </p>
 
 The image below shows the output of the app after entering the following message: 
