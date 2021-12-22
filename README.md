@@ -103,7 +103,7 @@ The final model learned using the boosted random forest algorithm yielded a weig
 
 Note that although the model's final accuracy happened to be ~95%, accuracy as a performance metric can be misleading because the dataset used to train on is imbalanced. For example, there are many more messages labeled as "aid_related" than there are for messages labeled as "water", and fewer yet that are labeled as "search_and_rescue". Precision and recall can be more helpful metrics in this context.
 
-Here are the results from grid search:
+Here are the results from grid search. After trying out various parameter combinations, the depth of the trees (`max_depth` parameter) and the number of estimators (`n_estimators` parameter) of the `XGBRFClassifier` class appeared to have a significant impact on model performance on both training and test sets. `XGBRFClassifier`'s `colsample_bylevel` parameter and `TfidfVectorizer`'s `max_features` parameter also appeared to be effective levers for balancing model complexity and underfitting.
 
 <p align="center">
 <img src="images/cv_results.jpg" >
