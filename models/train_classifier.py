@@ -111,6 +111,7 @@ def evaluate_model(model, X_test, Y_test, category_names):
     Y_pred = model.predict(X_test)
     print('Classification Report:\n', classification_report(Y_test, Y_pred, target_names=category_names))
     print('Model Accuracy: ', (Y_test == Y_pred).mean())
+    print('Final Model: ', model.best_estimator_)
 
 def save_model(model, model_filepath):
     '''
