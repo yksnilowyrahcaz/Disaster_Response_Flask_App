@@ -7,9 +7,10 @@ import numpy as np
 import pandas as pd
 from pathlib import Path
 from sqlalchemy import create_engine
+from joblib import Parallel
 
-import nltk
-nltk.download(['punkt', 'wordnet', 'stopwords'])
+# import nltk
+# nltk.download(['punkt', 'wordnet', 'stopwords'])
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
@@ -76,17 +77,16 @@ def tokenize(text):
 
 def build_model():
     '''
-    Construct a GridSearchCV class instance that vectorizes text and performs multi-label classification
+    Construct a GridSearchCV class instance to vectorize text and performs multi-label classification
     
     Returns
-        cv: sklearn.model_selection.GridSearchCV class instance constructed with sklearn.pipeline.Pipeline,
-            sklearn.feature_extraction.text.TfidfVectorizer, sklearn.multioutput.MultiOutputClassifier,
-            and xgboost.XGBRFClassifier class instances
+        grid: sklearn.model_selection.GridSearchCV class instance constructed with 
+        sklearn.pipeline.Pipeline, sklearn.feature_extraction.text.TfidfVectorizer, 
+        sklearn.multioutput.MultiOutputClassifier, and xgboost.XGBRFClassifier class instances
     '''
     pipeline = Pipeline([
     ('tfidf', TfidfVectorizer(tokenizer=tokenize)),
-    ('clf', MultiOutputClassifier(XGBRFClassifier(use_label_encoder=False, verbosity=0, learning_rate=0.1)))
-    
+    ('clf', MultiOutputClassifier(XGBRFClassifier(use_label_encoder=False, verbosity=0)))
     ])
     
     parameters = {
@@ -95,7 +95,7 @@ def build_model():
     'clf__estimator__learning_rate': (0.01, 0.1),
     }
 
-    grid = GridSearchCV(pipeline, param_grid=parameters, verbose=2, cv=5, n_jobs=4)
+    grid = GridSearchCV(pipeline, param_grid=parameters, verbose=2, cv=5)
     
     return grid
 
@@ -138,7 +138,7 @@ def main():
         model = build_model()
         
         print('Training model...')
-        model.fit(X_train, Y_train)
+        Parallel(prefer='threads', n_jobs=5, pre_dispath=5)(model.fit(X_train, Y_train))
         
         print('Evaluating model...')
         evaluate_model(model, X_test, Y_test, category_names)
