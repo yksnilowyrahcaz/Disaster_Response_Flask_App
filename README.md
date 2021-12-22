@@ -117,7 +117,7 @@ And here is the resulting classification report:
 
 The image below shows the output of the app after entering the following message: 
 
-> "If you receive this message, please help as soon as you can because a power line went down during the wind storm and many of us need medical care and we are desperately thirsty"
+> ## _"If you receive this message, please help as soon as you can because a power line went down during the wind storm and many of us need medical care and we are desperately thirsty"_
 
 Notice that the model appropriately maps "power line" to electricity and "thirsty" to water:
 
