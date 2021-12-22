@@ -115,7 +115,11 @@ And here is the resulting classification report:
 <img src="images/classification_report.jpg" />
 </p>
 
-The following images show the output of the app after entering the message, "If you receive this message, please help as soon as you can because a power line went down during the wind storm and many of us need medical care and we are desperately thirsty". Notice that the model appropriately maps "power line" to electricity and "thirsty" to water:
+The image below shows the output of the app after entering the following message: 
+
+> "If you receive this message, please help as soon as you can because a power line went down during the wind storm and many of us need medical care and we are desperately thirsty"
+
+Notice that the model appropriately maps "power line" to electricity and "thirsty" to water:
 
 <img src="images/classify_1.jpg" >
 
