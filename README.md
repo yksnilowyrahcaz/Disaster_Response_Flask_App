@@ -29,15 +29,15 @@ The flask app provided in this repository is separately deployed using [Heroku](
 
         pip install -r requirements.txt
         
-6. To run the ETL pipeline that cleans data and stores in a database, type the following in the command line:
+6. (Optional) To run the ETL pipeline that cleans data and stores in a database, type the following in the command line:
         
         python data/process_data.py data/messages.csv data/categories.csv data/CategorizedMessages.db
     
-7. To run the ML pipeline that trains classifier and saves, type the following in the command line:
+7. (Optional) To run the ML pipeline that trains classifier and saves, type the following in the command line:
        
         python models/train_classifier.py data/CategorizedMessages.db models/classifier.pkl
        
-Note: training the model might take a couple minutes.
+Note: training the model may take up to 15 minutes. The pickled model is already included in this repository and you can proceed to the next step without running steps 6-7.
        
 8. To run the Flask app, type the following in the command line:
        
@@ -99,15 +99,33 @@ Decision trees, which ensemble to form random forests, are greedy algorithms tha
 sklearn's `GridSearchCV` class was used to tune the `ngram_range` and `max_features` parameters of the `TfidfVectorizer`, as well as the `learning_rate` parameter of the `XGBRFClassifer`, while also performing 5-fold cross-validation. The best parameter combination turned out to be `ngram_range=((1,2))`, `max_features=10000`, and `learning_rate=0.1`.
 
 ## Results <a name="results"></a>
-The final model learned using the boosted random forest algorithm yielded a weighted average score of 76% precision, 55% recall and 60% F1-score (harmonic mean of precision and recall). Precision is the proportion of positive samples predicted by the model that were in fact positive samples. Recall is the proportion of true positive samples were correctly predicted by the model. Accuracy is the proportion predictions, positive and negative, that were correct classification. 
+The final model learned using the boosted random forest algorithm yielded a weighted average score of 73% precision, 61% recall and 64% F1-score (harmonic mean of precision and recall). Precision is the proportion of positive samples predicted by the model that were in fact positive samples. Recall is the proportion of true positive samples were correctly predicted by the model. Accuracy is the proportion predictions, positive and negative, that were correct classification. 
 
-Note that although the model's final accuracy happened to be 94.53%, accuracy as a performance metric can be misleading because the dataset used to train on is imbalanced. For example, there are many more messages labeled as "aid_related" than there are for messages labeled as "water", and fewer yet that are labeled as "search_and_rescue". Precision and recall can be more helpful metrics in this context.
+Note that although the model's final accuracy happened to be ~95%, accuracy as a performance metric can be misleading because the dataset used to train on is imbalanced. For example, there are many more messages labeled as "aid_related" than there are for messages labeled as "water", and fewer yet that are labeled as "search_and_rescue". Precision and recall can be more helpful metrics in this context.
+
+Here are the results from grid search:
+
+<p align="center">
+<img src="images/cv_results.jpg" />
+</p>
+
+The following shows the parameters of the final model that is deployed:
+
+<p align="center">
+<img src="images/cv_results.jpg" />
+</p>
+
+And here is the resulting classification report:
 
 <p align="center">
 <img src="images/classification_report.jpg" />
 </p>
 
-The following images show the output of the app after entering the message, "If you receive this message, please help as soon as you can because a power line went down during the wind storm and many of us need medical care and we are desperately thirsty". Notice that the model appropriately maps "power line" to electricity and "thirsty" to water:
+The image below shows the output of the app after entering the following message: 
+
+> #### _"If you receive this message, please help as soon as you can because a power line went down during the wind storm and many of us need medical care and we are desperately thirsty"_
+
+Notice that the model appropriately maps "power line" to electricity and "thirsty" to water:
 
 <img src="images/classify_1.jpg" >
 
