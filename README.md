@@ -109,10 +109,10 @@ Here are the results from grid search:
 <img src="images/cv_results.jpg" />
 </p>
 
-The following shows the parameters of the final model that is deployed:
+The following shows the parameters of the final model that is deployed, with tuned parameters highlighted in green:
 
 <p align="center">
-<img src="images/cv_results.jpg" />
+<img src="images/final_model.jpg" />
 </p>
 
 And here is the resulting classification report:
