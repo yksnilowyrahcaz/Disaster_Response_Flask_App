@@ -86,9 +86,9 @@ def build_model():
         ('clf', MultiOutputClassifier(XGBRFClassifier(use_label_encoder=False, 
                                                       colsample_bylevel=0.5,
                                                       verbosity=0)))])
-    parameters = {
-        'clf__estimator__n_estimators': (20, 50),
-        'clf__estimator__max_depth': (10, 40)}
+    
+    parameters = {'clf__estimator__n_estimators': (20, 50),
+                  'clf__estimator__max_depth': (10, 40)}
 
     grid = GridSearchCV(estimator=pipeline, param_grid=parameters, 
                         scoring='f1_weighted', verbose=3, cv=3, 
