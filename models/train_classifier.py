@@ -1,16 +1,13 @@
 # import libraries
 import re
 import sys
-import time
 import joblib
 import numpy as np
 import pandas as pd
 from pathlib import Path
 from sqlalchemy import create_engine
-from joblib import Parallel
+from joblib import parallel_backend
 
-# import nltk
-# nltk.download(['punkt', 'wordnet', 'stopwords'])
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
@@ -85,17 +82,20 @@ def build_model():
         sklearn.multioutput.MultiOutputClassifier, and xgboost.XGBRFClassifier class instances
     '''
     pipeline = Pipeline([
-    ('tfidf', TfidfVectorizer(tokenizer=tokenize)),
-    ('clf', MultiOutputClassifier(XGBRFClassifier(use_label_encoder=False, verbosity=0)))
+        ('tfidf', TfidfVectorizer(tokenizer=tokenize, max_features=1000)),
+        ('clf', MultiOutputClassifier(XGBRFClassifier(use_label_encoder=False, 
+                                                      colsample_bylevel=0.5,
+                                                      verbosity=0)))
     ])
     
     parameters = {
-    'tfidf__ngram_range': ((1, 1),(1, 2)),
-    'tfidf__max_features': (5000, 10000),
-    'clf__estimator__learning_rate': (0.01, 0.1),
+        'clf__estimator__n_estimators': (20, 50),
+        'clf__estimator__max_depth': (10, 40),
     }
 
-    grid = GridSearchCV(pipeline, param_grid=parameters, verbose=2, cv=5)
+    grid = GridSearchCV(estimator=pipeline, param_grid=parameters, 
+                        scoring='f1_weighted', verbose=3, cv=3, 
+                        n_jobs=4, pre_dispatch=1)
     
     return grid
 
@@ -128,7 +128,7 @@ def save_model(model, model_filepath):
 
 def main():
     if len(sys.argv) == 3:
-        start_time = time.time()
+        
         database_filepath, model_filepath = sys.argv[1:]
         print(f'Loading data...\n\tDATABASE: {database_filepath}')
         X, Y, category_names = load_data(database_filepath)
@@ -138,7 +138,8 @@ def main():
         model = build_model()
         
         print('Training model...')
-        Parallel(prefer='threads', n_jobs=5, pre_dispath=5)(model.fit(X_train, Y_train))
+        with parallel_backend(backend='threading', n_jobs=1):
+            model.fit(X_train, Y_train)
         
         print('Evaluating model...')
         evaluate_model(model, X_test, Y_test, category_names)
@@ -147,7 +148,6 @@ def main():
         save_model(model, model_filepath)
 
         print('Trained model saved!')
-        print(f'Total Time: {round((time.time() - start_time)/60, 2)} minutes')
 
     else:
         print('Please provide the filepath of the disaster messages database ',
