@@ -85,7 +85,7 @@ The messages.csv and categories.csv data files contain 26,248 records representi
 ## Methodology <a name="method"></a>
 
 ### ETL Pipeline
-To prepare the messages and categories data for modeling, each file was loaded into a pandas dataframe and an initial pass was made of removing duplicates. Hidden duplicates were identified within the categories data, in which the same id and message occurred more than once with a different set of category labels. This can be seen by using the `.duplicated(keep=False)` method on the categories dataframe. 
+To prepare the messages and categories data for modeling, each file was loaded into a pandas dataframe and an initial pass was made of removing duplicates. Hidden duplicates were identified within the categories data, in which the same id and message occurred more than once with a different set of category labels. This can be seen by executing `categories.id.duplicated(keep=False)`.
 
 Upon further investigation it was noted that for each hidden duplicate pair, one had one or more fewer labels that appeared relevant to the message. Judgement was used to choose the duplicate with the most "1" labels, operating on the assumption that false negatives are worse than false positives. 
 
