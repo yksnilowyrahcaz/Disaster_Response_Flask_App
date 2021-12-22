@@ -85,18 +85,14 @@ def build_model():
         ('tfidf', TfidfVectorizer(tokenizer=tokenize, max_features=1000)),
         ('clf', MultiOutputClassifier(XGBRFClassifier(use_label_encoder=False, 
                                                       colsample_bylevel=0.5,
-                                                      verbosity=0)))
-    ])
-    
+                                                      verbosity=0)))])
     parameters = {
         'clf__estimator__n_estimators': (20, 50),
-        'clf__estimator__max_depth': (10, 40),
-    }
+        'clf__estimator__max_depth': (10, 40)}
 
     grid = GridSearchCV(estimator=pipeline, param_grid=parameters, 
                         scoring='f1_weighted', verbose=3, cv=3, 
                         n_jobs=4, pre_dispatch=1)
-    
     return grid
 
 def evaluate_model(model, X_test, Y_test, category_names):
