@@ -82,12 +82,12 @@ def build_model():
         sklearn.multioutput.MultiOutputClassifier, and xgboost.XGBRFClassifier class instances
     '''
     pipeline = Pipeline([
-        ('tfidf', TfidfVectorizer(tokenizer=tokenize, max_features=1000)),
+        ('tfidf', TfidfVectorizer(tokenizer=tokenize, max_features=10000)),
         ('clf', MultiOutputClassifier(XGBRFClassifier(use_label_encoder=False, 
                                                       colsample_bylevel=0.5,
                                                       verbosity=0)))])
     
-    parameters = {'clf__estimator__n_estimators': (20, 50),
+    parameters = {'clf__estimator__n_estimators': (50, 100),
                   'clf__estimator__max_depth': (10, 40)}
 
     grid = GridSearchCV(estimator=pipeline, param_grid=parameters, 
