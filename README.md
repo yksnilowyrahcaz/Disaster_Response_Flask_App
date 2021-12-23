@@ -106,19 +106,19 @@ Note that although the model's final accuracy happened to be ~95%, accuracy as a
 Here are the results from grid search. After trying out various parameter combinations, the depth of the trees (`max_depth` parameter) and the number of estimators (`n_estimators` parameter) of the `XGBRFClassifier` class appeared to have a significant impact on model performance on both training and test sets. `XGBRFClassifier`'s `colsample_bylevel` parameter and `TfidfVectorizer`'s `max_features` parameter also appeared to be effective levers for balancing model complexity and underfitting.
 
 <p align="center">
-
+<img src="images/cv_results.jpg" >
 </p>
 
 The following shows the parameters of the final model that is deployed, with tuned parameters highlighted in green:
 
 <p align="center">
-
+<img src="images/final_model.jpg" >
 </p>
 
 And here is the resulting classification report:
 
 <p align="center">
-
+<img src="images/classification_report.jpg" >
 </p>
 
 The image below shows the output of the app after entering the following message: 
