@@ -33,7 +33,7 @@ The flask app provided in this repository is separately deployed using [Heroku](
         
         python data/process_data.py data/messages.csv data/categories.csv data/CategorizedMessages.db
     
-Note: CategorizedMessages.db is already provide within this repo and does not need to be recreated to run the flask app at step 8.
+Note: CategorizedMessages.db is already provided within this repo and does not need to be recreated to run the flask app at step 8.
 
 7. (Optional) To run the ML pipeline that trains classifier and saves, type the following in the command line:
        
