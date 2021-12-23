@@ -45,7 +45,7 @@ Note: training the model may take a significant amount of time. The pickled mode
        
        python app/run.py
        
-9. To view the Flask app being served on your local machine, open a browser, and go to http://localhost:3001/ if you are using Windows, or http://0.0.0.0:3001/ if you are using MacOS.
+9. To view the Flask app being served on your local machine, open a browser, and go to http://localhost:3001/ if you are using Windows.
 
 ## Supporting Packages <a name="packages"></a>
 In addition to the standard python libraries, this notebook and analysis rely on the following packages:
