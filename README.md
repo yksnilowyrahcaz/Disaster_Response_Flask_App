@@ -33,11 +33,13 @@ The flask app provided in this repository is separately deployed using [Heroku](
         
         python data/process_data.py data/messages.csv data/categories.csv data/CategorizedMessages.db
     
+Note: CategorizedMessages.db is already provide within this repo and does not need to be recreated to run the flask app at step 8.
+
 7. (Optional) To run the ML pipeline that trains classifier and saves, type the following in the command line:
        
         python models/train_classifier.py data/CategorizedMessages.db models/classifier.pkl
        
-Note: training the model may take up to 15 minutes. The pickled model is already included in this repository and you can proceed to the next step without running steps 6-7.
+Note: training the model may take a significant amount of time. The pickled model is already included in this repository and you can proceed to step 8 without retraining the model.
        
 8. To run the Flask app, type the following in the command line:
        
