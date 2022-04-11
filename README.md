@@ -49,12 +49,12 @@ Note: training the model may take a significant amount of time. The pickled mode
 
 ## Supporting Packages <a name="packages"></a>
 In addition to the standard python libraries, this notebook and analysis rely on the following packages:
-- Flask https://flask.palletsprojects.com/en/2.0.x/
-- plotly https://plotly.com/
-- SQLAlchemy https://www.sqlalchemy.org/
-- nltk https://www.nltk.org/
-- sklearn https://scikit-learn.org/stable/
-- xgboost https://xgboost.ai/
+- [Flask](https://flask.palletsprojects.com/en/2.0.x/)
+- [Plotly](https://plotly.com/)
+- [SQLAlchemy](https://www.sqlalchemy.org/)
+- [NLTK](https://www.nltk.org/)
+- [scikit-learn](https://scikit-learn.org/stable/)
+- [XGBoost](https://xgboost.ai/)
 
 Please see `requirements.txt` for a complete list of packages and dependencies utilized in the making of this project
 
